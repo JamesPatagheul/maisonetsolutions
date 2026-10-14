@@ -1,0 +1,80 @@
+MAISON ET SOLUTIONS - VERSION NETLIFY (sans PHP côté hébergement)
+=================================================================
+
+Comment ça marche, en 4 lignes :
+ 1. Tout le contenu du site est dans un fichier : content/data.json (+ vos images dans uploads/).
+ 2. L'administration (/admin/) est une page HTML : elle modifie ce fichier directement sur GitHub.
+ 3. À chaque clic sur « Publier », Netlify lance build.php, qui fabrique toutes les pages HTML.
+ 4. Les visiteurs ne voient que du HTML pur. Les formulaires utilisent Netlify Forms.
+
+------------------------------------------------------------
+ETAPE 1 - Mettre les fichiers sur GitHub
+------------------------------------------------------------
+ 1. Créez un compte gratuit sur github.com, puis « New repository »
+    (nom : maison-et-solutions, en Privé).
+ 2. Décompressez le zip. Sur la page du dépôt : « uploading an existing file »,
+    glissez TOUS les fichiers et dossiers (build.php, netlify.toml, system,
+    content, assets, admin, uploads...), puis « Commit changes ».
+    (Astuce : si le dossier uploads est vide, ce n'est pas grave.)
+
+------------------------------------------------------------
+ETAPE 2 - Brancher Netlify
+------------------------------------------------------------
+ 1. app.netlify.com > « Add new site » > « Import an existing project » > GitHub
+    > choisissez votre dépôt.
+ 2. Ne changez rien : les réglages viennent du fichier netlify.toml
+    (commande « php build.php », dossier « dist »). Cliquez « Deploy ».
+ 3. Après 1 à 2 minutes, votre site est en ligne.
+ 4. Si le déploiement échoue : ouvrez le journal (Deploys > le déploiement >
+    « Deploy log ») et envoyez-moi les dernières lignes.
+
+------------------------------------------------------------
+ETAPE 3 - Créer votre clé d'accès pour l'administration
+------------------------------------------------------------
+ 1. github.com > votre photo > Settings > Developer settings >
+    Personal access tokens > Fine-grained tokens > « Generate new token ».
+ 2. Nom : admin-site. Expiration : 1 an.
+ 3. « Repository access » > Only select repositories > votre dépôt.
+ 4. « Permissions » > Repository permissions > Contents : « Read and write ».
+ 5. Generate token, puis COPIEZ le jeton (il ne s'affiche qu'une fois).
+
+------------------------------------------------------------
+ETAPE 4 - Utiliser l'administration
+------------------------------------------------------------
+ 1. Allez sur https://votre-site.netlify.app/admin/
+ 2. Dépôt : votre-compte/maison-et-solutions   Branche : main   Jeton : celui de l'étape 3.
+    (Le jeton reste uniquement dans votre navigateur. Seules les personnes qui ont
+    un jeton peuvent modifier le site.)
+ 3. Modifiez ce que vous voulez (services, articles, réalisations, réglages, images...).
+ 4. Cliquez sur « Publier sur le site » (bandeau jaune en haut). Au bout de 1 à 2
+    minutes, les changements sont en ligne.
+ 5. Commencez par « Réglages du site » : téléphone, e-mail, adresse du site
+    (l'adresse Netlify ou votre domaine).
+
+------------------------------------------------------------
+FORMULAIRES (devis, rappel, newsletter)
+------------------------------------------------------------
+ - Les demandes arrivent dans Netlify : votre site > Forms.
+ - Pour un e-mail à chaque demande : Forms > Form notifications > Add notification >
+   Email notification (choisissez votre adresse).
+ - Le formulaire gratuit de Netlify accepte 100 demandes par mois.
+ - Si « Forms » reste vide : Site configuration > Forms > activez « Form detection »
+   puis relancez un déploiement.
+
+------------------------------------------------------------
+NOM DE DOMAINE
+------------------------------------------------------------
+ Netlify > Domain management > Add a domain. Ensuite, dans l'administration >
+ Réglages du site > « Adresse du site », mettez https://www.votredomaine.fr
+ et publiez (c'est utile pour Google).
+
+------------------------------------------------------------
+IMPORTANT
+------------------------------------------------------------
+ - Ne modifiez pas content/data.json à la main si vous n'êtes pas sûr :
+   passez par l'administration.
+ - Pas de mot de passe à retenir : la sécurité repose sur votre jeton GitHub.
+   Si vous le perdez, créez-en un autre (étape 3) et supprimez l'ancien sur GitHub.
+ - Ne partagez pas le jeton et n'utilisez l'administration que sur vos appareils.
+ - Les vidéos font 25 Mo maximum (compressez-les avant, ex. avec HandBrake).
+ - Les polices Bodoni Moda et Hanken Grotesk viennent de Google Fonts.

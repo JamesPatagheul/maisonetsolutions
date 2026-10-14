@@ -1,0 +1,11 @@
+[build]
+  command = "php build.php"
+  publish = "dist"
+
+[build.environment]
+  PHP_VERSION = "8.3"
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
